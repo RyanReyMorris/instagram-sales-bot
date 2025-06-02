@@ -1,0 +1,15 @@
+package ru.ryanreymorris.instagramsalesbot.config;
+
+public enum Properties {
+    POST_URL,
+    POST_ID,
+    TEXT_PATTERN,
+    NEWEST_COMMENT_ID,
+    AUTH_RETRY_COUNT,
+    AUDIO_INVITE_ID,
+    INST_FIND_JOB_REPEAT_EXPRESSION,
+    INST_SEND_JOB_REPEAT_EXPRESSION,
+    TELEGRAM_JOB_REPEAT_EXPRESSION,
+    LESSON_LINK,
+    QUESTIONNAIRE_LINK
+}

@@ -1,0 +1,188 @@
+databaseChangeLog:
+  - logicalFilePath: db/changelog/db.changelog-master.yaml
+  - changeSet:
+      id: 1
+      author: eyakimov
+      changes:
+        - createTable:
+            tableName: property
+            columns:
+              - column:
+                  name: key
+                  type: varchar(255)
+                  constraints:
+                    primaryKey: true
+                    nullable: true
+              - column:
+                  name: value
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+        - insert:
+            tableName: property
+            columns:
+              - column:
+                  name: key
+                  value: "AUTH_RETRY_COUNT"
+              - column:
+                  name: value
+                  value: "3"
+        - insert:
+            tableName: property
+            columns:
+              - column:
+                  name: key
+                  value: "INST_JOB_REPEAT_EXPRESSION"
+              - column:
+                  name: value
+                  value: "0 */10 * * * ?"
+        - insert:
+            tableName: property
+            columns:
+              - column:
+                  name: key
+                  value: "TELEGRAM_JOB_REPEAT_EXPRESSION"
+              - column:
+                  name: value
+                  value: "0 0 10 * * ?"
+  - changeSet:
+      id: 2
+      author: eyakimov
+      changes:
+        - createTable:
+            tableName: bot_user
+            columns:
+              - column:
+                  name: inst_user_id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+                    nullable: true
+              - column:
+                  name: tg_user_id
+                  type: bigint
+                  constraints:
+                    nullable: true
+              - column:
+                  name: is_admin
+                  type: boolean
+                  constraints:
+                    nullable: true
+              - column:
+                  name: inst_username
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: tg_username
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: comment_id
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: post_id
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: is_message_sent
+                  type: boolean
+                  constraints:
+                    nullable: true
+              - column:
+                  name: is_lesson_sent
+                  type: boolean
+                  constraints:
+                    nullable: true
+              - column:
+                  name: is_questionnaire_sent
+                  type: boolean
+                  constraints:
+                    nullable: true
+              - column:
+                  name: created
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: true
+              - column:
+                  name: sent_retry_counter
+                  type: int
+                  constraints:
+                    nullable: true
+              - column:
+                  name: error_message
+                  type: text
+                  constraints:
+                    nullable: true
+              - column:
+                  name: last_message
+                  type: integer
+                  constraints:
+                    nullable: true
+              - column:
+                  name: active_button
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+  - changeSet:
+      id: 3
+      author: eyakimov
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: tg_user_id
+            indexName: tg_user_id_index
+            tableName: bot_user
+  - changeSet:
+      id: 4
+      author: eyakimov
+      changes:
+        - createTable:
+            tableName: scheduler_job_info
+            columns:
+              - column:
+                  name: job_class
+                  type: varchar(255)
+                  constraints:
+                    primaryKey: true
+                    nullable: true
+              - column:
+                  name: job_group
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: cron_expression
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+  - changeSet:
+      id: 5
+      author: eyakimov
+      changes:
+        - delete:
+            tableName: property
+            where:  key='INST_JOB_REPEAT_EXPRESSION'
+        - insert:
+            tableName: property
+            columns:
+              - column:
+                  name: key
+                  value: "INST_FIND_JOB_REPEAT_EXPRESSION"
+              - column:
+                  name: value
+                  value: "0 */10 * * * ?"
+        - insert:
+            tableName: property
+            columns:
+              - column:
+                  name: key
+                  value: "INST_SEND_JOB_REPEAT_EXPRESSION"
+              - column:
+                  name: value
+                  value: "0 0 10 * * ?"

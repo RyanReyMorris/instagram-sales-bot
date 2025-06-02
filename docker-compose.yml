@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      PGPORT: 5433
+      POSTGRES_USER: eyakimov
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: botdb
+    ports:
+      - "5433:5433"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    restart: always
+
+  app:
+    build: .
+    ports:
+      - "8081:8081"
+      - "5005:5005"
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5433/botdb
+      SPRING_DATASOURCE_USERNAME: eyakimov
+      SPRING_DATASOURCE_PASSWORD: password
+      TELEGRAM_BOT_NAME: bot_name
+      TELEGRAM_BOT_KEY: bot_key
+      INST_LOGIN: inst_login
+      INST_PASSWORD: inst_password
+    restart: always
+
+volumes:
+  postgres-data:
