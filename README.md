@@ -7,9 +7,6 @@
 <p align="center">
 A bot for sending messages to Instagram users and exporting traffic to Telegram.
 </p>
-<p align="center">
-Uses integrations with telegram and instagram APIs
-</p>
 
 ## 🛠 Building
 1. Build project
